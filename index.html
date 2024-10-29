@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./styles/standard.css" />
+    <link rel="stylesheet" href="./styles/components.css" />
+
+    <title>Notizblock</title>
+  </head>
+
+  <body onload="init()">
+    <header class="atf"></header>
+
+    <main>
+      <section class="container">
+        <h1>Notizblock</h1>
+        <div class="addNoteContainer">
+          <div class="addNote">
+            <input
+              type="text"
+              name="Notiz hinzufügen"
+              placeholder="Notiz hinzufügen"
+              id="add__note"
+            />
+            <input type="button" onclick="addNote()" class="add" value="" />
+          </div>
+        </div>
+        <div id="content" class="content"></div>
+        <div>test</div>
+      </section>
+
+      <section class="container">
+        <h2>Archiv</h2>
+        <div id="archiveContainer" class="content"></div>
+      </section>
+    </main>
+
+    <footer></footer>
+  </body>
+
+  <script src="./script.js"></script>
+</html>
