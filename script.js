@@ -5,16 +5,16 @@ let allNotes = {
   'notes' : ['cucumber','milk', 'minced beef'],
   'archiveTitle' : [],
   'archive' : [],
-
 }
+
 
 function renderAllNotes () {
   renderNotes();
   saveNotesToLocalStorage()
-
   renderArchiv();
   saveArchiveToLocalStorage()
 }
+
 
 function moveNote (indexNote, startKey, destinationKey) {  
   let notesTitle = allNotes[startKey + "Title"].splice(indexNote, 1);
@@ -24,10 +24,7 @@ function moveNote (indexNote, startKey, destinationKey) {
   allNotes[destinationKey].push(note[0]);
 
   renderAllNotes ();
-
 }
-
-// show notes 
 
 
 function renderNotes() {
@@ -39,8 +36,8 @@ function renderNotes() {
     const noteTitle = allNotes.notesTitle[indexNote];
     contentRef.innerHTML += getNoteTemplate(note, noteTitle, indexNote); // add arry to html 
   }
- 
 }
+
 
 function renderArchiv() {
   let archiveRef = document.getElementById('archiveContainer'); // get div
@@ -51,10 +48,9 @@ function renderArchiv() {
     const archiveNoteTitle = allNotes.archiveTitle[indexArchive]; // define variabel
     archiveRef.innerHTML += getArchiveTemplate(archiveNote, archiveNoteTitle, indexArchive); // add arry to html 
   }
- 
 }
 
-// add new note to arry
+
 function addNote () {
   let newTitleRef = document.getElementById("add__Title"); // get input
   let newTitle =  newTitleRef.value; // get value of input
@@ -70,17 +66,16 @@ function addNote () {
   newNoteRef.value =""; // clear input 
 }
 
+
 function deleteNote(id) {
   allNotes.notes.splice(id ,1);
   allNotes.notesTitle.splice(id ,1);
-  
   renderAllNotes ()
 }
 
 function deleteArchiv(id) {
   allNotes.archiveTitle.splice(id ,1);
   allNotes.archive.splice(id ,1);
-
   renderAllNotes ()
 }
 
@@ -127,6 +122,7 @@ function saveArchiveToLocalStorage() {
   localStorage.setItem("allNotes.archive", JSON.stringify(allNotes.archive));
 }
 
+
 function getArchiveFromLocalStorage() {
   let myArchiveTitleArr = JSON.parse(localStorage.getItem("allNotes.archiveTitle"));
   let myArchiveArr = JSON.parse(localStorage.getItem("allNotes.archive"));
@@ -138,37 +134,3 @@ function getArchiveFromLocalStorage() {
     allNotes.archive = myArchiveArr;
   }
 }
-
-
-// html Templates 
-// show notes 
-function getNoteTemplate (note, noteTitle, indexNote) {
-return `<div class="noteUnit">
-          <p class="titleStyle"> ${noteTitle}</p> 
-          <p class="noteStyle"> ${note}</p> 
-          <div class="iconUnit">
-            <button onclick="deleteNote(${indexNote})" class="delete"></button>
-            <button onclick="moveNote(${indexNote}, 'notes', 'archive')" class="archive"></button>
-           </div>
-        </div>`;
-
-}
-
-function getArchiveTemplate (archiveNote, archiveNoteTitle, indexArchive) {
-  return `<div class="noteUnit">
-            <p class="titleStyle">${archiveNoteTitle}</p> 
-            <p class="noteStyle">${archiveNote}</p> 
-            <div class="iconUnit">
-              <button onclick="deleteArchiv(${indexArchive})" class="delete"></button>
-            <button onclick="moveNote(${indexArchive}, 'archive', 'notes')" class="archive"></button>
-             </div>
-          </div>`;
-  
-  }
-
-
-// notizen arichvieren
-
-
-
-
