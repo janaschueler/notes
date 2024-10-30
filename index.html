@@ -12,25 +12,35 @@
     <title>Notizblock</title>
   </head>
 
-  <body onload="init()">
+  <body onload="renderAllNotes()">
     <header class="atf"></header>
 
     <main>
       <section class="container">
-        <h1>Notizblock mit Git</h1>
+        <h1>Notizblock</h1>
         <div class="addNoteContainer">
           <div class="addNote">
+            <input
+              type="text"
+              name="Title hinzufügen"
+              placeholder="Title hinzufügen"
+              id="add__Title"
+            />
             <input
               type="text"
               name="Notiz hinzufügen"
               placeholder="Notiz hinzufügen"
               id="add__note"
             />
-            <input type="button" onclick="addNote()" class="add" value="" />
+            <input
+              type="button"
+              onclick="addNote(), addTitle()"
+              class="add"
+              value=""
+            />
           </div>
         </div>
         <div id="content" class="content"></div>
-        <div>test</div>
       </section>
 
       <section class="container">
@@ -42,5 +52,6 @@
     <footer></footer>
   </body>
 
+  <script src="./template.js"></script>
   <script src="./script.js"></script>
 </html>

@@ -1,26 +1,43 @@
 // global variabel
-let notes = ['banana','apple', 'lemon'];
 
-let archive = [];
+let allNotes = {
+  'notesTitle' : ['Vegetables','Dairy', 'Meat'],
+  'notes' : ['cucumber','milk', 'minced beef'],
+  'archiveTitle' : [],
+  'archive' : [],
+
+}
+
+function renderAllNotes () {
+  renderNotes();
+  saveNotesToLocalStorage()
+
+  renderArchiv();
+  saveArchiveToLocalStorage()
+}
+
+function moveNote (indexNote, startKey, destinationKey) {  
+  let notesTitle = allNotes[startKey + "Title"].splice(indexNote, 1);
+  allNotes[destinationKey + "Title"].push(notesTitle[0])
+  
+  let note = allNotes[startKey].splice(indexNote,  1);
+  allNotes[destinationKey].push(note[0]);
+
+  renderAllNotes ();
+
+}
 
 // show notes 
 
-function init() {
 
-  getNotesFromLocalStorage ();
-  getArchiveFromLocalStorage()
-
-  renderNotes();
-  renderArchiv();
-
-}
 function renderNotes() {
   let contentRef = document.getElementById('content'); // get div
   contentRef.innerHTML = ""; // clear div content
 
-  for (let indexNote = 0; indexNote < notes.length; indexNote++) { 
-    const note = notes[indexNote]; // define variabel
-    contentRef.innerHTML += getNoteTemplate(note, indexNote); // add arry to html 
+  for (let indexNote = 0; indexNote < allNotes.notes.length; indexNote++) { 
+    const note = allNotes.notes[indexNote]; // define variabel
+    const noteTitle = allNotes.notesTitle[indexNote];
+    contentRef.innerHTML += getNoteTemplate(note, noteTitle, indexNote); // add arry to html 
   }
  
 }
@@ -29,109 +46,125 @@ function renderArchiv() {
   let archiveRef = document.getElementById('archiveContainer'); // get div
   archiveRef.innerHTML = ""; // clear div content
 
-  for (let indexArchive = 0; indexArchive < archive.length; indexArchive++) { 
-    const archiveNote = archive[indexArchive]; // define variabel
-    archiveRef.innerHTML += getArchiveTemplate(archiveNote, indexArchive); // add arry to html 
+  for (let indexArchive = 0; indexArchive < allNotes.archive.length; indexArchive++) { 
+    const archiveNote = allNotes.archive[indexArchive]; // define variabel
+    const archiveNoteTitle = allNotes.archiveTitle[indexArchive]; // define variabel
+    archiveRef.innerHTML += getArchiveTemplate(archiveNote, archiveNoteTitle, indexArchive); // add arry to html 
   }
  
 }
 
 // add new note to arry
 function addNote () {
-  let newNoteRef = document.getElementById("add__note"); // get input
-  let newNote =  newNoteRef.value; // get value of input
+  let newTitleRef = document.getElementById("add__Title"); // get input
+  let newTitle =  newTitleRef.value; // get value of input
 
-  notes.push(newNote); // add new note to array
+  let newNoteRef = document.getElementById("add__note"); // get input
+  let newNote = newNoteRef.value; // get value of input
+
+  allNotes.notesTitle.push(newTitle); // add new note to array
+  allNotes.notes.push(newNote); // add new note to array
   renderNotes(); // show new note in arry
   saveNotesToLocalStorage();
+  newTitleRef.value =""; // clear input 
   newNoteRef.value =""; // clear input 
 }
 
 function deleteNote(id) {
-  notes.splice(id ,1);
-  renderNotes();
-  saveNotesToLocalStorage()
+  allNotes.notes.splice(id ,1);
+  allNotes.notesTitle.splice(id ,1);
+  
+  renderAllNotes ()
 }
 
 function deleteArchiv(id) {
-  archive.splice(id ,1);
-  renderArchiv();
-  saveArchiveToLocalStorage()
+  allNotes.archiveTitle.splice(id ,1);
+  allNotes.archive.splice(id ,1);
+
+  renderAllNotes ()
 }
 
-function archiveNote(note, indexNote) {
-  archive.push(note);
-  renderArchiv();
-  saveArchiveToLocalStorage()
+// function archiveNote(note, indexNote) {
+//   allNotes.archive.push(note);
+//   renderArchiv();
+//   saveArchiveToLocalStorage()
 
-  notes.splice(indexNote ,1);
-  renderNotes();
-  saveNotesToLocalStorage()
+//   allNotes.notes.splice(indexNote ,1);
+//   renderNotes();
+//   saveNotesToLocalStorage()
 
-}
+// }
 
-function unarchive(previousNote, indexArchive) {
-  notes.push(previousNote);
-  renderNotes();
-  saveNotesToLocalStorage()
+// function unarchive(previousNote, indexArchive) {
+//   allNotes.notes.push(previousNote);
+//   renderNotes();
+//   saveNotesToLocalStorage()
 
-  archive.splice(indexArchive ,1);
-  renderArchiv();
-  saveArchiveToLocalStorage()
-}
+//   allNotes.archive.splice(indexArchive ,1);
+//   renderArchiv();
+//   saveArchiveToLocalStorage()
+// }
 
 function saveNotesToLocalStorage() {
-  localStorage.setItem("notes", JSON.stringify(notes));
+  localStorage.setItem("allNotes.notesTitle", JSON.stringify(allNotes.notesTitle));
+  localStorage.setItem("allNotes.notes", JSON.stringify(allNotes.notes));
 }
 
 function getNotesFromLocalStorage() {
-  let myNoteArr = JSON.parse(localStorage.getItem("notes"));
+  let myTitleArr = JSON.parse(localStorage.getItem("allNotes.notesTitle"));
+  let myNoteArr = JSON.parse(localStorage.getItem("allNotes.notes"));
   if (myNoteArr === null) {
     renderNotes();
   }
   else {
-    notes = myNoteArr;
+    allNotes.notesTitle = myTitleArr;
+    allNotes.notes = myNoteArr;
   }
 }
 
 function saveArchiveToLocalStorage() {
-  localStorage.setItem("archive", JSON.stringify(archive));
+  localStorage.setItem("allNotes.archiveTitle", JSON.stringify(allNotes.archiveTitle));
+  localStorage.setItem("allNotes.archive", JSON.stringify(allNotes.archive));
 }
 
 function getArchiveFromLocalStorage() {
-  let myArchiveArr = JSON.parse(localStorage.getItem("archive"));
+  let myArchiveTitleArr = JSON.parse(localStorage.getItem("allNotes.archiveTitle"));
+  let myArchiveArr = JSON.parse(localStorage.getItem("allNotes.archive"));
   if (myArchiveArr === null) {
     renderNotes();
   }
   else {
-    archive = myArchiveArr;
+    allNotes.archiveTitle =  myArchiveTitleArr;
+    allNotes.archive = myArchiveArr;
   }
 }
 
+
 // html Templates 
 // show notes 
-function getNoteTemplate (note, indexNote) {
+function getNoteTemplate (note, noteTitle, indexNote) {
 return `<div class="noteUnit">
-          <p class="noteStyle">+ ${note}</p> 
+          <p class="titleStyle"> ${noteTitle}</p> 
+          <p class="noteStyle"> ${note}</p> 
           <div class="iconUnit">
             <button onclick="deleteNote(${indexNote})" class="delete"></button>
-            <button onclick="archiveNote('${note}', ${indexNote} )" class="archive"></button>
+            <button onclick="moveNote(${indexNote}, 'notes', 'archive')" class="archive"></button>
            </div>
         </div>`;
 
 }
 
-function getArchiveTemplate (archiveNote, indexArchive) {
+function getArchiveTemplate (archiveNote, archiveNoteTitle, indexArchive) {
   return `<div class="noteUnit">
-            <p class="noteStyle">- ${archiveNote}</p> 
+            <p class="titleStyle">${archiveNoteTitle}</p> 
+            <p class="noteStyle">${archiveNote}</p> 
             <div class="iconUnit">
               <button onclick="deleteArchiv(${indexArchive})" class="delete"></button>
-              <button onclick="unarchive('${archiveNote}', '${indexArchive}')" class="unarchive"></button>
+            <button onclick="moveNote(${indexArchive}, 'archive', 'notes')" class="archive"></button>
              </div>
           </div>`;
   
   }
-
 
 
 // notizen arichvieren

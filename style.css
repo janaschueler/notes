@@ -26,7 +26,7 @@ h1 {
   margin-right: 32px;
   margin-bottom: 32px;
   color: rgb(7, 36, 46);
-  text-align: center;
+  text-align: left;
 }
 
 h2 {
@@ -36,9 +36,9 @@ h2 {
   margin-top: 32px;
   margin-left: 32px;
   margin-right: 32px;
-  margin-bottom: 32px;
+  margin-bottom: 0px;
   color: rgb(7, 36, 46);
-  text-align: center;
+  text-align: left;
 }
 
 body {
@@ -72,27 +72,44 @@ header {
 }
 
 .container {
-  min-height: 80px;
-  width: min(100%, 1440px);
-  margin-inline: auto;
-  padding-inline: clamp(16px, 12vw, 160px);
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin-bottom: 32px;
+  margin-bottom: 8px;
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 12vw, 160px);
 }
 
 .content {
-  background-color: rgba(7, 36, 46, 0.1);
-  border-radius: 8px;
   display: flex;
-  justify-content: flex-start;
+}
+
+.noteUnit {
+  display: flex;
   flex-direction: column;
-  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(7, 36, 46, 0.1);
+  margin-left: 8px;
+  margin-top: 32px;
+  width: 160px;
+  border-radius: 8px;
+}
+.iconUnit {
+  display: flex;
+  justify-content: space-between;
+  gap: 72px;
+  margin-bottom: 8px;
 }
 
 .noteStyle {
   padding: 8px;
+}
+
+.titleStyle {
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .link {
@@ -119,25 +136,17 @@ header {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+input {
+  border-color: solid black;
+  border-radius: 8px;
 }
 
 .addNoteContainer {
   display: flex;
   justify-content: flex-end;
-}
-
-.noteUnit {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.iconUnit {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
 }
 
 .add {
