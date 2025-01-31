@@ -4,54 +4,84 @@
   scroll-behavior: smooth;
 }
 
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
 main {
   flex: 1;
+  min-height: 80px;
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 12vw, 160px);
 }
 
 @font-face {
   font-family: "Open Sans";
-  src: url("./fonts/OpenSans-Light.woff2") format("woff2"),
-    url("./fonts/OpenSans-Light.woff") format("woff");
+  src: url("./fonts/OpenSans-Light.woff2") format("woff2"), url("./fonts/OpenSans-Light.woff") format("woff");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
-h1 {
-  font-family: "Open Sans", sans-serif;
+@font-face {
+  font-family: "Open Sans";
+  src: url("./fonts/OpenSans-Regular.woff2") format("woff2"), url("./fonts/OpenSans-Regular.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jolly Lodger";
+  src: url("./fonts/JollyLodger.woff2") format("woff2"), url("./fonts/JollyLodger.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url("./fonts/OpenSans-Bold.woff2") format("woff2"), url("./fonts/OpenSans-Bold.woff") format("woff");
   font-weight: bold;
-  font-size: 32px;
-  margin-top: 32px;
-  margin-left: 32px;
+  font-style: normal;
+  font-display: swap;
+}
+
+h1 {
+  font-family: "Jolly Lodger";
+  font-weight: normal;
+  font-size: 40px;
+  margin-top: 16px;
   margin-right: 32px;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
   color: rgb(7, 36, 46);
-  text-align: left;
+  text-align: center;
 }
 
 h2 {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Jolly Lodger";
   font-weight: 300;
   font-size: 32px;
   margin-top: 32px;
-  margin-left: 32px;
   margin-right: 32px;
-  margin-bottom: 0px;
+  margin-bottom: 16px;
   color: rgb(7, 36, 46);
-  text-align: left;
+  text-align: center;
 }
 
 body {
   font-family: "Open Sans";
-  font-weight: normal;
+  font-weight: 300;
   margin: 0;
   color: black;
   display: flex;
   flex-direction: column;
   font-optical-sizing: auto;
-  font-weight: normal;
   font-size: 16px;
   min-height: 100vh;
+  text-align: center;
 }
 
 header {
@@ -68,7 +98,17 @@ header {
 }
 
 .atf {
-  background-color: rgba(7, 36, 46, 0.1);
+  background-color: rgba(4, 45, 58);
+}
+
+.atf img {
+  height: 40px;
+}
+
+.atf p {
+  color: white;
+  padding-left: 16px;
+  font-weight: 300;
 }
 
 .container {
@@ -83,18 +123,26 @@ header {
 
 .content {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+  margin-bottom: 32px;
 }
 
 .noteUnit {
+  flex: 1 1 calc(25% - 12px); /* 25% Breite */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(7, 36, 46, 0.1);
-  margin-left: 8px;
-  margin-top: 32px;
-  width: 160px;
+  background-color: rgba(7, 36, 46);
+  color: white;
+  margin-top: 8px;
+  max-width: 160px; /* Optionale Begrenzung */
+  min-width: 120px; /* Optionale Begrenzung */
   border-radius: 8px;
+  box-sizing: border-box; /* Bezieht padding/margin in die Breite ein */
 }
 .iconUnit {
   display: flex;
@@ -105,11 +153,15 @@ header {
 
 .noteStyle {
   padding: 8px;
+  font-size: 12px;
+  text-align: center;
+  padding-bottom: 16px;
 }
 
 .titleStyle {
   font-size: 20px;
   font-weight: 500;
+  text-align: center;
 }
 
 .link {
@@ -146,7 +198,7 @@ input {
 
 .addNoteContainer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .add {
@@ -224,5 +276,61 @@ input {
   background-color: rgba(7, 36, 46, 0.6);
 }
 
-@media screen and (max-width: 800px) {
+footer {
+  background-color: rgb(7, 36, 46);
+  min-height: 80px;
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 12vw, 160px);
+  display: flex;
+  align-items: center;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  color: rgba(7, 36, 46);
+}
+
+footer img {
+  height: 40px;
+}
+
+.einladung {
+  text-align: center;
+  background-image: url(./assets/img/Schlichter\ Geist\ mit\ ovalen\ Augen\ zum\ Ausmalen.jpg);
+}
+
+.einladung img {
+  width: 300px;
+  margin-top: 16px;
+}
+
+@media screen and (max-width: 700px) {
+  .addNote {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .addNoteContainer {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center !important;
+  }
+
+  .addNote {
+    align-items: center;
+  }
+
+  .einladung img {
+    width: 180px !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .einladung img {
+    width: 120px !important;
+    margin-top: 16px !important;
+  }
+
+  main {
+    padding-inline: 0;
+  }
 }

@@ -6,49 +6,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="./styles/standard.css" />
     <link rel="stylesheet" href="./styles/components.css" />
 
-    <title>Notizblock</title>
+    <link rel="icon" href="./assets/icons/ghost-solid.svg" sizes="32x32" />
+    <title>Eriks Geburtstag</title>
   </head>
 
   <body onload="renderAllNotes()">
-    <header class="atf"></header>
+    <header class="atf">
+  
+    </header>
 
     <main>
       <section class="container">
-        <h1>Notizblock</h1>
+        <div class="einladung">
+          <img src="./assets/img/Schlichter Geist mit ovalen Augen zum Ausmalen.jpg" alt="">
+          <h1>Eriks Geburtstag</h1>
+          <p>
+            Am 15. Februar 2025 lade ich dich zu einer schaurig-schönen Geister-Geburtstagsparty auf Burg Schlotterstein ein! <br />
+            <br /> </p>
+            <p style="font-weight: bold; color: rgb(7, 36, 46);;">Wann? </p> <p>Von 12:00 bis 15:00 Uhr <br /></p>
+            <p style="font-weight: bold; color: rgb(7, 36, 46);">Was mitbringen? </p> <p> Dich selbst, warm eingepackt. <br /> <br />Falls du ein Geschenk mitbringen möchtest, habe ich hier eine kleine Liste mit Ideen zusammengestellt. Du kannst aber auch gerne selbst kreativ werden.</p>
+
+            
+            <br />
+          </p>
+        </div>
+          <div>
+            <h2>Meine Wünsche</h2>
+            <p>Falls ihr einen dieser Wünsche erfüllen möchtet, klickt bitte auf das kleine "x". Dann verschwindet er von der Liste. <br>Vielen Dank!</p>
+          </div>
+          <div id="content" class="content"></div>
+        </div>
+
+        <h2>Neue Wünsche hinzufügen</h2>
         <div class="addNoteContainer">
           <div class="addNote">
-            <input
-              type="text"
-              name="Title hinzufügen"
-              placeholder="Title hinzufügen"
-              id="add__Title"
-            />
-            <input
-              type="text"
-              name="Notiz hinzufügen"
-              placeholder="Notiz hinzufügen"
-              id="add__note"
-            />
-            <input
-              type="button"
-              onclick="addNote(), addTitle()"
-              class="add"
-              value=""
-            />
+            <input type="text" name="Title hinzufügen" placeholder="Kategorie hinzufügen" id="add__Title" />
+            <input type="text" name="Notiz hinzufügen" placeholder="Beschreibung" id="add__note" />
+            <input type="button" onclick="addNote()" class="add" value="" />
           </div>
         </div>
-        <div id="content" class="content"></div>
       </section>
 
       <section class="container">
-        <h2>Archiv</h2>
         <div id="archiveContainer" class="content"></div>
+        <p style="text-align: center;">
+         Spukige Grüße, <br />Erik <br />
+          <br />
+        </p>
       </section>
     </main>
-
     <footer></footer>
   </body>
 
